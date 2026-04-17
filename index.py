@@ -123,261 +123,229 @@ HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexxon Hackers - IP Information API</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.95;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .endpoint-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .endpoint-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-        }
-        
-        .method-badge {
-            background: #28a745;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            margin-left: 15px;
-            font-weight: normal;
-        }
-        
-        .url-box {
-            background: #2d3748;
-            color: #68d391;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1em;
-            margin: 15px 0;
-            word-break: break-all;
-        }
-        
-        .example-box {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        
-        .example-box code {
-            color: #e83e8c;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .dev-info {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-        
-        .dev-info h2 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        .dev-info .founder {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .feature-card .emoji {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        .feature-card h4 {
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .feature-card p {
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            border-top: 1px solid #e2e8f0;
-        }
-        
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IP Information API - Advanced Geolocation Service</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#1e40af'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+</style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🌍 IP Information API</h1>
-            <p>Advanced IP Geolocation & Intelligence Service</p>
-        </div>
-        
-        <div class="content">
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="emoji">🎯</div>
-                    <h4>Precise Location</h4>
-                    <p>City, Region & Coordinates</p>
-                </div>
-                <div class="feature-card">
-                    <div class="emoji">🚩</div>
-                    <h4>Country Flags</h4>
-                    <p>Automatic Flag Emojis</p>
-                </div>
-                <div class="feature-card">
-                    <div class="emoji">🗺️</div>
-                    <h4>Google Maps</h4>
-                    <p>Direct Map Integration</p>
-                </div>
-                <div class="feature-card">
-                    <div class="emoji">⚡</div>
-                    <h4>Batch Support</h4>
-                    <p>Multiple IPs at Once</p>
-                </div>
-            </div>
-            
-            <div class="endpoint-section">
-                <h3>Single IP Lookup <span class="method-badge">GET</span></h3>
-                <div class="url-box">
-                    /ip-info/ip?=YOUR_IP_ADDRESS
-                </div>
-                <div class="example-box">
-                    <strong>📝 Example:</strong><br>
-                    <code>GET /ip-info/ip?=8.8.8.8</code>
-                </div>
-            </div>
-            
-            <div class="endpoint-section">
-                <h3>Batch IP Lookup <span class="method-badge">POST</span></h3>
-                <div class="url-box">
-                    /ip-info/batch
-                </div>
-                <div class="example-box">
-                    <strong>📝 Request Body:</strong><br>
-                    <code>{"ips": ["8.8.8.8", "1.1.1.1"]}</code>
-                </div>
-            </div>
-            
-            <div class="endpoint-section">
-                <h3>Get Your Own IP <span class="method-badge">GET</span></h3>
-                <div class="url-box">
-                    /ip-info/myip
-                </div>
-                <div class="example-box">
-                    <strong>📝 Example Response:</strong><br>
-                    <code>{"ip": "YOUR_IP_ADDRESS"}</code>
-                </div>
-            </div>
-            
-            <div class="dev-info">
-                <h2>⚡ Nexxon Hackers ⚡</h2>
-                <div class="founder">Developed by Creator Shyamchand & Ayan</div>
-                <div style="margin-top: 10px; font-size: 1.1em;">CEO & Founder Of - Nexxon Hackers</div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>© 2024 Nexxon Hackers | All Rights Reserved</p>
-            <p style="margin-top: 5px;">🚀 Powering IP Intelligence Worldwide</p>
-        </div>
-    </div>
+<body class="bg-white min-h-screen">
+<main class="pt-8 pb-8 px-4">
+<header class="text-center py-8">
+<h1 class="text-3xl font-bold text-gray-900 mb-2">IP Information API</h1>
+<p class="text-lg text-gray-600 mb-4">Advanced IP Geolocation & Intelligence Service</p>
+<p class="text-sm text-gray-500 mb-6">Precise Location Data & Real-time Intelligence</p>
+<div class="mb-6">
+<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop" 
+     alt="Developers collaborating" 
+     class="w-full h-48 object-cover object-top rounded-xl">
+</div>
+</header>
+<section class="mb-8">
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-xl mr-4">
+<i class="ri-map-pin-line text-blue-600 ri-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Precise Location</h4>
+<p class="text-sm text-gray-600">City, Region & Coordinates</p>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 flex items-center justify-center bg-green-100 rounded-xl mr-4">
+<i class="ri-map-2-line text-green-600 ri-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Google Maps</h4>
+<p class="text-sm text-gray-600">Direct Map Integration</p>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl p-6 border border-purple-100">
+<div class="flex items-center mb-3">
+<div class="w-12 h-12 flex items-center justify-center bg-purple-100 rounded-xl mr-4">
+<i class="ri-flashlight-line text-purple-600 ri-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Batch Support</h4>
+<p class="text-sm text-gray-600">Multiple IPs at Once</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<h2 class="text-xl font-bold text-gray-900 mb-6">API Endpoints</h2>
+<div class="space-y-6">
+<div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-semibold text-gray-900">Single IP Lookup</h3>
+<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">GET</span>
+</div>
+<div class="bg-white rounded-lg p-4 border border-gray-200 mb-4">
+<code class="text-sm text-gray-700">/ip-info/ip?ip=YOUR_IP_ADDRESS</code>
+</div>
+<div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+<p class="text-sm font-medium text-blue-900 mb-2">📝 Example:</p>
+<code class="text-sm text-blue-700">GET /ip-info/ip?ip=8.8.8.8</code>
+</div>
+</div>
+<div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-semibold text-gray-900">Batch IP Lookup</h3>
+<span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded-full">POST</span>
+</div>
+<div class="bg-white rounded-lg p-4 border border-gray-200 mb-4">
+<code class="text-sm text-gray-700">/ip-info/batch</code>
+</div>
+<div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+<p class="text-sm font-medium text-blue-900 mb-2">📝 Request Body:</p>
+<code class="text-sm text-blue-700">{"ips": ["8.8.8.8", "1.1.1.1"]}</code>
+</div>
+</div>
+<div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-semibold text-gray-900">Get Your Own IP</h3>
+<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">GET</span>
+</div>
+<div class="bg-white rounded-lg p-4 border border-gray-200 mb-4">
+<code class="text-sm text-gray-700">/ip-info/myip</code>
+</div>
+<div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+<p class="text-sm font-medium text-blue-900 mb-2">📝 Example Response:</p>
+<code class="text-sm text-blue-700">{"your_ip": "YOUR_IP_ADDRESS"}</code>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<div class="bg-gradient-to-r from-primary to-secondary rounded-xl p-6 text-white text-center">
+<div class="mb-4">
+<div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="ri-code-s-slash-line text-white ri-2x"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">Try Our API</h3>
+<p class="text-blue-100 text-sm mb-4">Test the endpoints with your own IP address</p>
+</div>
+<button id="tryApiBtn" class="bg-white text-primary px-6 py-3 rounded-button font-medium cursor-pointer !rounded-button hover:bg-blue-50 transition">
+Get Started Now
+</button>
+</div>
+</section>
+<div class="text-center py-4">
+<p class="text-sm text-gray-500">Developed by Creator Shyamchand & Ayan | CEO & Founder Of - Nexxon Hackers</p>
+</div>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tryBtn = document.getElementById('tryApiBtn');
+    if (tryBtn) {
+        tryBtn.addEventListener('click', function() {
+            // Fetch user's IP and show demo
+            fetch('/ip-info/myip')
+                .then(res => res.json())
+                .then(data => {
+                    const demoModal = document.createElement('div');
+                    demoModal.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4';
+                    demoModal.innerHTML = `
+                        <div class="bg-white rounded-xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-gray-900">API Demo - Your IP</h3>
+                                <button class="w-8 h-8 flex items-center justify-center cursor-pointer close-modal">
+                                    <i class="ri-close-line text-gray-400 ri-lg"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <p class="text-sm text-gray-600 mb-2">Your IP Address:</p>
+                                    <code class="text-lg font-mono text-primary">${data.your_ip}</code>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Test Endpoint</label>
+                                    <select id="endpointSelect" class="w-full p-3 border border-gray-300 rounded-lg text-sm">
+                                        <option value="myip">/ip-info/myip</option>
+                                        <option value="ip">/ip-info/ip?ip=${data.your_ip}</option>
+                                        <option value="batch">/ip-info/batch (POST)</option>
+                                    </select>
+                                </div>
+                                <div id="responseArea" class="bg-gray-900 rounded-lg p-4 hidden">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs text-gray-400">Response:</span>
+                                        <button id="copyResponse" class="text-xs text-blue-400 hover:text-blue-300">Copy</button>
+                                    </div>
+                                    <pre id="responseContent" class="text-xs text-green-400 overflow-x-auto"></pre>
+                                </div>
+                                <button id="sendRequest" class="w-full bg-primary text-white py-3 rounded-button font-medium cursor-pointer !rounded-button hover:bg-secondary transition">
+                                    Send Request
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(demoModal);
+                    
+                    const closeBtn = demoModal.querySelector('.close-modal');
+                    const sendBtn = demoModal.querySelector('#sendRequest');
+                    const select = demoModal.querySelector('#endpointSelect');
+                    const responseArea = demoModal.querySelector('#responseArea');
+                    const responseContent = demoModal.querySelector('#responseContent');
+                    const copyBtn = demoModal.querySelector('#copyResponse');
+                    
+                    closeBtn.addEventListener('click', () => document.body.removeChild(demoModal));
+                    demoModal.addEventListener('click', (e) => {
+                        if (e.target === demoModal) document.body.removeChild(demoModal);
+                    });
+                    
+                    sendBtn.addEventListener('click', async () => {
+                        const endpoint = select.value;
+                        let url, options = { method: 'GET' };
+                        
+                        if (endpoint === 'myip') {
+                            url = '/ip-info/myip';
+                        } else if (endpoint === 'ip') {
+                            url = `/ip-info/ip?ip=${data.your_ip}`;
+                        } else {
+                            url = '/ip-info/batch';
+                            options = {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ ips: [data.your_ip, '8.8.8.8'] })
+                            };
+                        }
+                        
+                        try {
+                            const res = await fetch(url, options);
+                            const json = await res.json();
+                            responseContent.textContent = JSON.stringify(json, null, 2);
+                            responseArea.classList.remove('hidden');
+                        } catch (err) {
+                            responseContent.textContent = 'Error: ' + err.message;
+                            responseArea.classList.remove('hidden');
+                        }
+                    });
+                    
+                    copyBtn.addEventListener('click', () => {
+                        navigator.clipboard.writeText(responseContent.textContent);
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                    });
+                });
+        });
+    }
+});
+</script>
 </body>
 </html>
 '''
@@ -398,8 +366,8 @@ def ip_lookup():
             "success": False,
             "error": "Missing 'ip' parameter",
             "usage": {
-                "endpoint": "/ip-info/ip?=IP_ADDRESS",
-                "example": "/ip-info/ip?=8.8.8.8"
+                "endpoint": "/ip-info/ip?ip=IP_ADDRESS",
+                "example": "/ip-info/ip?ip=8.8.8.8"
             },
             "api_info": {
                 "developed_by": "Creator Shyamchand & Ayan",
@@ -563,7 +531,7 @@ def not_found(e):
         "error": "Endpoint not found",
         "available_endpoints": {
             "home": "/",
-            "single_ip": "/ip-info/ip?=IP_ADDRESS",
+            "single_ip": "/ip-info/ip?ip=IP_ADDRESS",
             "batch_ip": "/ip-info/batch (POST)",
             "my_ip": "/ip-info/myip",
             "health": "/ip-info/health"
